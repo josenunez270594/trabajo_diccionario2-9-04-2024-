@@ -1,0 +1,48 @@
+"""
+Una Empresa dedicada a la distribución de mercancía requiere el desarrollo de un aplicativo que permita registrar los pedidos solicitados por los diferentes clientes dentro de los cuales se tiene la siguiente información:
+Nombre del cliente, dirección, contacto, sexo, descripción de la casa o lugar para guiar al personal de entrega. 
+
+Adicional a ello se debe colocar el nombre del producto, referencia y cantidades a solicitar. 
+Todo esto debe quedar registrado en un diccionario y debe tener la posibilidad de ver todos los pedidos realizados.
+"""
+import os
+dicc_pedidos = {}
+sw = True
+
+def fnt_limpiar():
+    os.system('cls')
+    print(f'\nbienvenidos al sistema de registro de pedidos \nAutor: Jose Daniel Nuñez \nIstitución: FUNLAM \n {dicc_pedidos} ')
+
+def fnt_registrar(dicc_pedidos, direccion, nombre, contacto, sexo, descripcion, nombre_producto, referencia, cantidades):
+    if nombre ==  "" or direccion == '' or contacto == '' or sexo == '' or descripcion == '' or nombre_producto == '' or referencia == '' or cantidades == '':  
+        enter = input('Debe diligenciar toda la información solicitada <ENTER>') 
+    else:
+        dicc_pedidos[direccion] = {nombre, contacto, sexo, descripcion, nombre_producto, referencia, cantidades}
+        enter = input('se registro con exito <ENTER>')
+    
+def fnt_selector(op):
+    global dicc_pedidos
+    global sw
+    if op == '1':
+        direccion = input('direccion: ')
+        nombre = input('nombre: ')
+        contacto = input('contacto: ')
+        sexo = input('sexo: (M) o (F)').upper()
+        descripcion = input('descripcion de la casa: ')
+        nombre_producto = input('nombre_producto: ')
+        referencia = input('referencia: ')
+        cantidad = input('cantidad: ')
+        fnt_registrar(dicc_pedidos, direccion, nombre, contacto, sexo, descripcion, nombre_producto, referencia, cantidad)
+    if op == '2':
+        fnt_limpiar ()
+        print('\n\ncantidad de pedidos realizados: ', len(dicc_pedidos))
+        for key, value in dicc_pedidos.items():
+            print(f"{key}: {value}\n")
+        enter = input('mostrado con exito <ENTER>')
+    if op == '3':
+        sw = False
+
+while sw == True:
+    fnt_limpiar()
+    opcion = input('\n<<<<<<<MENU PRINCIPAL SELECTOR>>>>>>\n\n1. REGISTRAR \n2. MOSTRAR PEDIDOS \n3. SALIR \n-->')
+    fnt_selector(opcion)
