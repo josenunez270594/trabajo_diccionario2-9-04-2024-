@@ -1,0 +1,61 @@
+"""
+9/04/2024
+una trasportsadora requiere el desarrollo de una aplicación que permita llevar un registro
+de los despachos de sus vehiculos teniendo en cuenta lo siguiente:
+
+1. placa del vehiculo
+2. descripción del vehiculo
+3. nombre del conductor
+4. contacto del conductor
+5. ruta
+6. descripción de la carga
+
+el numero de despacho es una varialbe que se genera de ua forma automatica, es decir que ser autoincremeta.
+dicha informacion de be quedar registrada en un diccionario.
+
+el sistema debe realizar:
+registro de salidas y mostrar salidas
+"""
+import os
+dicc_informacion = {}
+num_despachoint = 0 # no lo utilizo, utilizo el len(dicc_informacion) para contar los pedidos
+sw = True
+def fnt_limpiar ():
+    os.system('cls')
+    print(f'\nbienvenidos al sistema de registro de una transportadora \nAutor: Jose Daniel Nuñez \nIstitución: FUNLAM \n ')
+
+def fnt_registrarSalidas(dicc_informacion, placa, descripcion, conductor, contacto, ruta, carga):
+    if placa == '' or descripcion == '' or  conductor == '' or   contacto == '' or ruta==''or carga == '':
+        enter = input('Debe diligenciar toda la información solicitada <ENTER>')
+    else:
+        dicc_informacion[placa] = {descripcion,conductor,contacto,ruta,carga}
+        enter = input('se registro con exito <ENTER>')
+
+def fnt_selector(op):
+    global dicc_informacion
+    global sw
+    global num_despachoint
+    if op == '1':
+        fnt_limpiar ()
+        print('reguistre a continuación la informacion del elemento a guardar:\n')
+        placa = input('placa: ')
+        descripcion = input('descripcion: ')
+        conductor = input('conductor: ')
+        contacto = input('contacto: ')
+        ruta = input('ruta: ')
+        carga = input('carga: ')
+        num_despachoint += 1 
+        fnt_registrarSalidas(dicc_informacion, placa, descripcion, conductor, contacto, ruta, carga)
+    if op == '2':
+        fnt_limpiar ()
+        print('\n\ncantidad de registros: ', len(dicc_informacion))
+        for key, value in dicc_informacion.items():
+            print(f"{key}: {value}\n")
+        enter = input('mostrado con exito <ENTER>')
+    if op == '3':
+        sw = False
+        
+while sw == True:
+    fnt_limpiar()
+    opcion = input('<<<<<<<<MENU DE SELECCIÓN>>>>>>\n\n1. registrar \n2. mostrar \n3.salir \n->>')
+    fnt_selector(opcion)
